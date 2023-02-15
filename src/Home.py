@@ -37,7 +37,7 @@ class HomePage(Tk.Frame):
             image=self.button_image_1,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: print("base_button_1 clicked"),
+            command=self.click_inputbase64(),
             relief="flat"
         )
         self.base_button_1.place(
@@ -53,7 +53,7 @@ class HomePage(Tk.Frame):
             image=self.button_image_2,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: print("string_button_2 clicked"),
+            command=self.click_inputstring(),
             relief="flat"
         )
         self.string_button_2.place(
@@ -85,7 +85,7 @@ class HomePage(Tk.Frame):
         self.mainloop()
     
     def click_inputstring(self):
-        self.origin.InputString()
+        self.origin.RanesCipherString()
 
     def click_inputbase64(self):
-        self.origin.InputBase64()
+        self.origin.RanesCipherBase()
