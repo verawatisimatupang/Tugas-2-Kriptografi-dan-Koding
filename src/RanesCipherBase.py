@@ -30,6 +30,94 @@ class RanesCipherBasePage(Tk.Frame):
 
         self.canvas.place(x = 0, y = 0)
 
+        self.key = StringVar()
+        self.entry_image_1 = PhotoImage(
+            file=relative_to_assets("entry_1.png"))
+        self.entry_bg_1 = self.canvas.create_image(
+            381.0,
+            589.5,
+            image=self.entry_image_1
+        )
+        self.entry_1 = Entry(
+            bd=0,
+            bg="#FFFFFF",
+            fg="#000716",
+            highlightthickness=0,
+            textvariable=self.key
+        )
+        self.entry_1.place(
+            x=158.0,
+            y=537.0,
+            width=446.0,
+            height=103.0
+        )
+
+        self.plain = StringVar()
+        self.entry_image_2 = PhotoImage(
+            file=relative_to_assets("entry_2.png"))
+        self.entry_bg_2 = self.canvas.create_image(
+            381.0,
+            412.5,
+            image=self.entry_image_2
+        )
+        self.entry_2 = Entry(
+            bd=0,
+            bg="#FFFFFF",
+            fg="#000716",
+            highlightthickness=0,
+            textvariable=self.plain
+        )
+        self.entry_2.place(
+            x=158.0,
+            y=360.0,
+            width=446.0,
+            height=103.0
+        )
+
+        self.cipher_base = StringVar()
+        self.entry_image_3 = PhotoImage(
+            file=relative_to_assets("entry_3.png"))
+        self.entry_bg_3 = self.canvas.create_image(
+            983.0,
+            589.5,
+            image=self.entry_image_3
+        )
+        self.entry_3 = Entry(
+            bd=0,
+            bg="#FFFFFF",
+            fg="#000716",
+            highlightthickness=0,
+            textvariable= self.cipher_base
+        )
+        self.entry_3.place(
+            x=760.0,
+            y=537.0,
+            width=446.0,
+            height=103.0
+        )
+
+        self.cipher_string = StringVar()
+        self.entry_image_4 = PhotoImage(
+            file=relative_to_assets("entry_4.png"))
+        self.entry_bg_4 = self.canvas.create_image(
+            983.0,
+            412.5,
+            image=self.entry_image_4
+        )
+        self.entry_4 = Entry(
+            bd=0,
+            bg="#FFFFFF",
+            fg="#000716",
+            highlightthickness=0,
+            textvariable=self.cipher_string
+        )
+        self.entry_4.place(
+            x=760.0,
+            y=360.0,
+            width=446.0,
+            height=103.0
+        )
+
         self.button_image_1 = PhotoImage(
             file=relative_to_assets("encrypt_button.png"))
         self.encrypt_button = Button(
@@ -64,7 +152,7 @@ class RanesCipherBasePage(Tk.Frame):
 
         self.button_image_3 = PhotoImage(
             file=relative_to_assets("back_button.png"))
-        back_button = Button(
+        self.back_button = Button(
             image=self.button_image_3,
             borderwidth=0,
             highlightthickness=0,
@@ -94,102 +182,16 @@ class RanesCipherBasePage(Tk.Frame):
             height=55.0
         )
 
-        self.key = StringVar()
-        self.entry_image_1 = PhotoImage(
-            file=relative_to_assets("entry_1.png"))
-        self.entry_bg_1 = self.canvas.create_image(
-            381.0,
-            412.5,
-            image=self.entry_image_1
-        )
-        self.entry_1 = Entry(
-            bd=0,
-            bg="#FFFFFF",
-            fg="#000716",
-            highlightthickness=0
-        )
-        self.entry_1.place(
-            x=158.0,
-            y=360.0,
-            width=446.0,
-            height=103.0
-        )
-
-        self.plain = StringVar()
-        self.entry_image_2 = PhotoImage(
-            file=relative_to_assets("entry_2.png"))
-        self.entry_bg_2 = self.canvas.create_image(
-            983.0,
-            412.5,
-            image=self.entry_image_2
-        )
-        self.entry_2 = Entry(
-            bd=0,
-            bg="#FFFFFF",
-            fg="#000716",
-            highlightthickness=0
-        )
-        self.entry_2.place(
-            x=760.0,
-            y=360.0,
-            width=446.0,
-            height=103.0
-        )
-
-        self.cipher_base = StringVar()
-        self.entry_image_3 = PhotoImage(
-            file=relative_to_assets("entry_3.png"))
-        self.entry_bg_3 = self.canvas.create_image(
-            983.0,
-            589.5,
-            image=self.entry_image_3
-        )
-        self.entry_3 = Entry(
-            bd=0,
-            bg="#FFFFFF",
-            fg="#000716",
-            highlightthickness=0
-            textvariable= self.cipher_base
-        )
-        self.entry_3.place(
-            x=760.0,
-            y=537.0,
-            width=446.0,
-            height=103.0
-        )
-
-        self.cipher_string= StringVar()
-        self.entry_image_4 = PhotoImage(
-            file=relative_to_assets("entry_4.png"))
-        self.entry_bg_4 = self.canvas.create_image(
-            381.0,
-            589.5,
-            image=self.entry_image_4
-        )
-        self.entry_4 = Entry(
-            bd=0,
-            bg="#FFFFFF",
-            fg="#000716",
-            highlightthickness=0
-            textvariable=self.cipher_string
-        )
-        self.entry_4.place(
-            x=158.0,
-            y=537.0,
-            width=446.0,
-            height=103.0
-        )
-
         self.button_image_5 = PhotoImage(
-            file=relative_to_assets("button_5.png"))
-        self.button_5 = Button(
+            file=relative_to_assets("downloadbiner_no_space_button.png"))
+        self.downloadbiner_no_space_button = Button(
             image=self.button_image_5,
             borderwidth=0,
             highlightthickness=0,
             command=lambda: self.downloadfilebiner_nospace(),
             relief="flat"
         )
-        self.button_5.place(
+        self.downloadbiner_no_space_button.place(
             x=669.0,
             y=417.0,
             width=75.0,
@@ -197,15 +199,15 @@ class RanesCipherBasePage(Tk.Frame):
         )
 
         self.button_image_6 = PhotoImage(
-            file=relative_to_assets("button_6.png"))
-        self.button_6 = Button(
+            file=relative_to_assets("downloadbiner_with_space_button.png"))
+        self.downloadbiner_with_space_button = Button(
             image=self.button_image_6,
             borderwidth=0,
             highlightthickness=0,
             command=lambda: self.downloadfilebiner_withspace(),
             relief="flat"
         )
-        self.button_6.place(
+        self.downloadbiner_with_space_button.place(
             x=670.0,
             y=594.0,
             width=75.0,
@@ -213,15 +215,15 @@ class RanesCipherBasePage(Tk.Frame):
         )
 
         self.button_image_7 = PhotoImage(
-            file=relative_to_assets("button_7.png"))
-        self.button_7 = Button(
+            file=relative_to_assets("uploadbiner_plaintext_button.png"))
+        self.uploadbiner_plaintext_button = Button(
             image=self.button_image_7,
             borderwidth=0,
             highlightthickness=0,
             command=lambda: self.uploadfilebiner_plaintext(),
             relief="flat"
         )
-        self.button_7.place(
+        self.uploadbiner_plaintext_button.place(
             x=68.0,
             y=417.0,
             width=75.0,
@@ -229,15 +231,15 @@ class RanesCipherBasePage(Tk.Frame):
         )
 
         self.button_image_8 = PhotoImage(
-            file=relative_to_assets("button_8.png"))
-        self.button_8 = Button(
+            file=relative_to_assets("uploadbiner_key_button.png"))
+        self.uploadbiner_key_button = Button(
             image=self.button_image_8,
             borderwidth=0,
             highlightthickness=0,
             command=lambda: self.uploadfilebiner_key(),
             relief="flat"
         )
-        self.button_8.place(
+        self.uploadbiner_key_button.place(
             x=68.0,
             y=594.0,
             width=75.0,
@@ -245,15 +247,15 @@ class RanesCipherBasePage(Tk.Frame):
         )
 
         self.button_image_9 = PhotoImage(
-            file=relative_to_assets("button_9.png"))
-        self.button_9 = Button(
+            file=relative_to_assets("uploadtxt_plaintext_button.png"))
+        self.uploadtxt_plaintext_button = Button(
             image=self.button_image_9,
             borderwidth=0,
             highlightthickness=0,
             command=lambda: self.uploadfiletxt_plaintext(),
             relief="flat"
         )
-        self.button_9.place(
+        self.uploadtxt_plaintext_button.place(
             x=68.0,
             y=360.0,
             width=75.0,
@@ -261,48 +263,48 @@ class RanesCipherBasePage(Tk.Frame):
         )
 
         self.button_image_10 = PhotoImage(
-            file=relative_to_assets("button_10.png"))
-        self.button_10 = Button(
+            file=relative_to_assets("uploadtxt_key_button.png"))
+        self.uploadtxt_key_button = Button(
             image=self.button_image_10,
             borderwidth=0,
             highlightthickness=0,
             command=lambda: self.uploadfiletxt_key(),
             relief="flat"
         )
-        self.button_10.place(
-            x=669.0,
-            y=360.0,
+        self.uploadtxt_key_button.place(
+            x=68.0,
+            y=537.0,
             width=75.0,
             height=48.0
         )
 
         self.button_image_11 = PhotoImage(
-            file=relative_to_assets("button_11.png"))
-        self.button_11 = Button(
+            file=relative_to_assets("downloadtxt_no_space_button.png"))
+        self.downloadtxt_no_space_button = Button(
             image=self.button_image_11,
             borderwidth=0,
             highlightthickness=0,
             command=lambda: self.downloadfiletxt_nospace(),
             relief="flat"
         )
-        self.button_11.place(
-            x=670.0,
-            y=537.0,
+        self.downloadtxt_no_space_button.place(
+            x=669.0,
+            y=360.0,
             width=75.0,
             height=48.0
         )
 
         self.button_image_12 = PhotoImage(
-            file=relative_to_assets("button_12.png"))
-        self.button_12 = Button(
+            file=relative_to_assets("downloadtxt_with_space_button.png"))
+        self.downloadtxt_with_space_button = Button(
             image=self.button_image_12,
             borderwidth=0,
             highlightthickness=0,
             command=lambda: self.downloadfiletxt_withspace(),
             relief="flat"
         )
-        self.button_12.place(
-            x=68.0,
+        self.downloadtxt_with_space_button.place(
+            x=670.0,
             y=537.0,
             width=75.0,
             height=48.0
@@ -358,3 +360,10 @@ class RanesCipherBasePage(Tk.Frame):
     
     def click_backHome(self):
         self.origin.Home()
+    
+    # Reset
+    def reset(self):
+        self.plain.set("")
+        self.key.set("")
+        self.cipher_string.set("")
+        self.cipher_base.set("")
