@@ -17,7 +17,7 @@ ASSETS_PATH = OUTPUT_PATH / Path(r"../img")
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
-class RanesCipher(Tk.Frame):
+class RanesCipherString(Tk.Frame):
     def __init__(self, master, pageManager):
         super().__init__(master)
         self.master = master
@@ -25,7 +25,7 @@ class RanesCipher(Tk.Frame):
         self.pack()
         self.RanesCipher()
 
-    def RanesCipher(self):
+    def RanesCipherString(self):
         self.canvas = Canvas(
             self.master,
             bg = "#F4F3F9",
