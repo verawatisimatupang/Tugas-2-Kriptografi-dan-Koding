@@ -6,7 +6,6 @@ import base64
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"../img")
 
-
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
@@ -369,11 +368,11 @@ class RanesCipherStringPage(Tk.Frame):
         self.cipher_string.set("")
         self.cipher_base.set("")
     
-    def string_to_ascii(self, text):
+    def text_to_ascii(self, text):
         ascii_list = [ord(char) for char in text]
         return ascii_list
     
-    def ascii_to_string(self, number):
+    def ascii_to_text(self, number):
         text = []
         for i in range (len(number)):
             text.append(chr(number[i]))
@@ -392,6 +391,16 @@ class RanesCipherStringPage(Tk.Frame):
         text_str = text_bytes.decode("utf-8")
         return text_str
     
+    def ascii_to_base64(self, number):
+        convert_to_string = self.ascii_to_text(number)
+        convert_to_base64 = self.text_to_base64(convert_to_string)
+        return convert_to_base64
+
+    def base64_to_ascii(self, base64_str):
+        convert_to_string = self.base64_to_text(base64_str)
+        convert_to_ascii = self.text_to_ascii(convert_to_string)
+        return convert_to_ascii
+
     def KSA(self, key):
         S = []
         K = []
@@ -437,5 +446,9 @@ class RanesCipherStringPage(Tk.Frame):
             ksa_key = self.KSA(key)
             prga_ksakey_plaintext = self.PRGA(ksa_key, plaintext)
             xor_plaintext_prgaksakey = self.XOR(plaintext, prga_ksakey_plaintext)
-            result_string = self.ascii_to_string(xor_plaintext_prgaksakey)
+            result_string = self.ascii_to_text(xor_plaintext_prgaksakey)
+            result_base64 = self.text_to_base64(result_string)
         self.cipher_string.set(result_string)
+        self.cipher_base.set(result_base64)
+    
+    # Decrypt
