@@ -15,7 +15,7 @@ class RanesCipherBasePage(Tk.Frame):
         self.master = master
         self.origin = pageManager
         self.pack()
-        self.RanesCipher()
+        self.RanesCipherBase()
 
     def RanesCipherBase(self):
         self.canvas = Canvas(
