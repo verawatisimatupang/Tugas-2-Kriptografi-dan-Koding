@@ -433,7 +433,7 @@ class RanesCipherBasePage(Tk.Frame):
             ciphertext.append(formula)
         return ciphertext
     
-    # Encrypt
+    # Encrypt (Masih salah)
     def encrypt(self):
         plaintext = self.plain.get()
         key = self.key.get()
@@ -449,8 +449,8 @@ class RanesCipherBasePage(Tk.Frame):
             xor_plaintext_prgaksakey = self.XOR(convert_to_string, prga_ksakey_plaintext)
             result_string = self.ascii_to_text(xor_plaintext_prgaksakey)
             result_base64 = self.text_to_base64(result_string)
-        self.cipher_string.set(result_string)
-        self.cipher_base.set(result_base64)
+            self.cipher_string.set(result_string)
+            self.cipher_base.set(result_base64)
 
     # Decyrpt
     def decrypt(self):
@@ -468,5 +468,5 @@ class RanesCipherBasePage(Tk.Frame):
             xor_plaintext_prgaksakey = self.XOR(convert_to_string, prga_ksakey_plaintext)
             result_string = self.ascii_to_text(xor_plaintext_prgaksakey)
             result_base64 = self.text_to_base64(result_string)
-        self.cipher_string.set(result_string)
-        self.cipher_base.set(result_base64)
+            self.cipher_string.set(result_string)
+            self.cipher_base.set(result_base64)
