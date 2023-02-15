@@ -1,10 +1,10 @@
 from pathlib import Path
 from tkinter import StringVar, Tk, Canvas, Entry, Text, Button, PhotoImage, filedialog, messagebox
 import tkinter as Tk
+import base64
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"../img")
-
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
@@ -367,3 +367,87 @@ class RanesCipherBasePage(Tk.Frame):
         self.key.set("")
         self.cipher_string.set("")
         self.cipher_base.set("")
+    
+    def text_to_ascii(self, text):
+        ascii_list = [ord(char) for char in text]
+        return ascii_list
+    
+    def ascii_to_text(self, number):
+        text = []
+        for i in range (len(number)):
+            text.append(chr(number[i]))
+            result  = "".join(text)
+        return result
+
+    def text_to_base64(self, text):
+        text_bytes = text.encode("utf-8")
+        base64_bytes = base64.b64encode(text_bytes)
+        base64_str = base64_bytes.decode("ascii")
+        return base64_str
+
+    def base64_to_text(self, base64_str):
+        base64_bytes = base64_str.encode("ascii")
+        text_bytes = base64.b64decode(base64_bytes)
+        text_str = text_bytes.decode("utf-8")
+        return text_str
+    
+    def ascii_to_base64(self, number):
+        convert_to_string = self.ascii_to_text(number)
+        convert_to_base64 = self.text_to_base64(convert_to_string)
+        return convert_to_base64
+
+    def base64_to_ascii(self, base64_str):
+        convert_to_string = self.base64_to_text(base64_str)
+        convert_to_ascii = self.text_to_ascii(convert_to_string)
+        return convert_to_ascii
+    
+    def KSA(self, key):
+        S = []
+        K = []
+
+        for i in range(0,256):
+            S.append(i)
+            K.append(ord(key[i % len(key)]))
+
+        j = 0
+        for i in range(0,256):
+            j = (j + S[i] + K[i]) % 256
+            S[i], S[j] = S[j], S[i]
+        
+        return S
+    
+    def PRGA(self, S, plaintext):
+        j = 0
+        K = []
+        for i in range (len(plaintext)):
+            i = (i+1) % 256
+            j = (j + S[i]) % 256
+            S[i], S[j] = S[j], S[i]
+            K.append(S[(S[i] + S[j]) % 256])
+        return K
+    
+    def XOR(self, plaintext, key):
+        ciphertext = []
+        for i in range(len(plaintext)):
+            formula = ord(plaintext[i]) ^ key[i]
+            ciphertext.append(formula)
+        return ciphertext
+    
+    # Encyrpt
+    def decrypt(self):
+        plaintext = self.plain.get()
+        key = self.key.get()
+
+        if len(plaintext) == 0:
+            messagebox.showerror("Error", "Please input plaintext / file")
+        elif len(key) == 0:
+            messagebox.showerror("Error", "Please input key / file")
+        else :  
+            convert_to_string = self.base64_to_text(plaintext)
+            ksa_key = self.KSA(key)
+            prga_ksakey_plaintext = self.PRGA(ksa_key, convert_to_string)
+            xor_plaintext_prgaksakey = self.XOR(convert_to_string, prga_ksakey_plaintext)
+            result_string = self.ascii_to_text(xor_plaintext_prgaksakey)
+            result_base64 = self.text_to_base64(result_string)
+        self.cipher_string.set(result_string)
+        self.cipher_base.set(result_base64)
