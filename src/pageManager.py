@@ -1,5 +1,5 @@
 from tkinter import Tk
-import Home
+import Home, RanesCipherString, RanesCipherBase
 
 class pageManager():
     def __init__(self):
@@ -17,4 +17,12 @@ class pageManager():
     
     def Home(self):
         self.page = Home.HomePage(master = self.window, pageManager = self)
+        self.page.startPage()
+    
+    def RanesCipherString(self):
+        self.page = RanesCipherString.RanesCipherStringPage(master = self.window, pageManager = self)
+        self.page.startPage()
+    
+    def RanesCipherBase(self):
+        self.page = RanesCipherBase.RanesCipherBasePage(master = self.window, pageManager = self)
         self.page.startPage()
