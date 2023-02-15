@@ -36,7 +36,7 @@ class RanesCipherBasePage(Tk.Frame):
             image=self.button_image_1,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: print("encrypt_button clicked"),
+            command=lambda: self.encrypt(),
             relief="flat"
         )
         self.encrypt_button.place(
@@ -52,7 +52,7 @@ class RanesCipherBasePage(Tk.Frame):
             image=self.button_image_2,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: print("reset_button clicked"),
+            command=lambda: self.reset(),
             relief="flat"
         )
         self.reset_button.place(
@@ -68,7 +68,7 @@ class RanesCipherBasePage(Tk.Frame):
             image=self.button_image_3,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: print("back_button clicked"),
+            command=lambda: self.click_backHome(),
             relief="flat"
         )
         self.back_button.place(
@@ -84,7 +84,7 @@ class RanesCipherBasePage(Tk.Frame):
             image=self.button_image_4,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: print("decrypt_button clicked"),
+            command=lambda: self.decrypt(),
             relief="flat"
         )
         self.decrypt_button.place(
@@ -149,6 +149,7 @@ class RanesCipherBasePage(Tk.Frame):
             bg="#FFFFFF",
             fg="#000716",
             highlightthickness=0
+            textvariable= self.cipher_base
         )
         self.entry_3.place(
             x=760.0,
@@ -170,6 +171,7 @@ class RanesCipherBasePage(Tk.Frame):
             bg="#FFFFFF",
             fg="#000716",
             highlightthickness=0
+            textvariable=self.cipher_string
         )
         self.entry_4.place(
             x=158.0,
@@ -184,7 +186,7 @@ class RanesCipherBasePage(Tk.Frame):
             image=self.button_image_5,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: print("button_5 clicked"),
+            command=lambda: self.downloadfilebiner_nospace(),
             relief="flat"
         )
         self.button_5.place(
@@ -200,7 +202,7 @@ class RanesCipherBasePage(Tk.Frame):
             image=self.button_image_6,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: print("button_6 clicked"),
+            command=lambda: self.downloadfilebiner_withspace(),
             relief="flat"
         )
         self.button_6.place(
@@ -216,7 +218,7 @@ class RanesCipherBasePage(Tk.Frame):
             image=self.button_image_7,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: print("button_7 clicked"),
+            command=lambda: self.uploadfilebiner_plaintext(),
             relief="flat"
         )
         self.button_7.place(
@@ -232,7 +234,7 @@ class RanesCipherBasePage(Tk.Frame):
             image=self.button_image_8,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: print("button_8 clicked"),
+            command=lambda: self.uploadfilebiner_key(),
             relief="flat"
         )
         self.button_8.place(
@@ -248,7 +250,7 @@ class RanesCipherBasePage(Tk.Frame):
             image=self.button_image_9,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: print("button_9 clicked"),
+            command=lambda: self.uploadfiletxt_plaintext(),
             relief="flat"
         )
         self.button_9.place(
@@ -264,7 +266,7 @@ class RanesCipherBasePage(Tk.Frame):
             image=self.button_image_10,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: print("button_10 clicked"),
+            command=lambda: self.uploadfiletxt_key(),
             relief="flat"
         )
         self.button_10.place(
@@ -280,7 +282,7 @@ class RanesCipherBasePage(Tk.Frame):
             image=self.button_image_11,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: print("button_11 clicked"),
+            command=lambda: self.downloadfiletxt_nospace(),
             relief="flat"
         )
         self.button_11.place(
@@ -296,7 +298,7 @@ class RanesCipherBasePage(Tk.Frame):
             image=self.button_image_12,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: print("button_12 clicked"),
+            command=lambda: self.downloadfiletxt_withspace(),
             relief="flat"
         )
         self.button_12.place(
