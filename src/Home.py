@@ -34,7 +34,7 @@ class HomePage(Tk.Frame):
             image=self.button_image_1,
             borderwidth=0,
             highlightthickness=0,
-            command=self.click_inputbase64(),
+            command=lambda: self.click_inputbase64(),
             relief="flat"
         )
         self.base_button_1.place(
@@ -50,7 +50,7 @@ class HomePage(Tk.Frame):
             image=self.button_image_2,
             borderwidth=0,
             highlightthickness=0,
-            command=self.click_inputstring(),
+            command=lambda: self.click_inputstring(),
             relief="flat"
         )
         self.string_button_2.place(
