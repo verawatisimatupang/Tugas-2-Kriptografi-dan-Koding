@@ -416,7 +416,7 @@ class RanesCipherBasePage(Tk.Frame):
         
         return S
     
-    def PRGA(S, plaintext):
+    def PRGA(self, S, plaintext):
         j = 0
         K = []
         for i in range (len(plaintext)):
