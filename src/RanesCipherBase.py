@@ -341,7 +341,7 @@ class RanesCipherBasePage(Tk.Frame):
             158.0,
             331.0,
             anchor="nw",
-            text="Enter text for encryption and decryption:",
+            text="Enter text for encryption and decryption (Base64) :",
             fill="#000000",
             font=("Inter", 20 * -1)
         )
