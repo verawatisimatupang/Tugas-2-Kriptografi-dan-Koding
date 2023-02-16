@@ -411,7 +411,7 @@ class RanesCipherBasePage(Tk.Frame):
 
         j = 0
         for i in range(0,256):
-            j = (j + S[i] + K[i]) % 256
+            j = (2*S[i] + i + K[i % 2]) % 256
             S[i], S[j] = S[j], S[i]
         
         return S
