@@ -433,6 +433,38 @@ class RanesCipherBasePage(Tk.Frame):
             ciphertext.append(formula)
         return ciphertext
     
+    # Check length key
+    def checklength_key(self,plaintext, key):
+        while len(key) < len(plaintext):
+            key += key
+            result = key[:len(plaintext)]
+        finalkey = []
+        for i in range(0, len(key), len(plaintext)):
+            space_text = key[i:len(plaintext)]
+            finalkey.append(space_text)
+            result = "".join(finalkey) 
+        return result 
+
+    def encrypt_extended_vigenere(self, plaintext, key):
+        check_length_key = self.checklength_key(plaintext,key)
+        ciphertext = []
+        for i in range (len(plaintext)):
+            plaintext_to_int = ord(plaintext[i]) 
+            key_to_int = ord(check_length_key[i])
+            encrypt_formula = (plaintext_to_int + key_to_int) % 256
+            ciphertext.append(chr(encrypt_formula))
+        return ciphertext
+    
+    def decrypt_extended_vigenere(self, plaintext, key):
+        check_length_key = self.checklength_key(plaintext,key)
+        ciphertext = []
+        for i in range (len(plaintext)):
+            plaintext_to_int = ord(plaintext[i]) 
+            key_to_int = ord(check_length_key[i])
+            encrypt_formula = (plaintext_to_int - key_to_int) % 256
+            ciphertext.append(chr(encrypt_formula))
+        return ciphertext
+    
     # Encrypt
     def encrypt(self):
         plaintext = self.plain.get()
