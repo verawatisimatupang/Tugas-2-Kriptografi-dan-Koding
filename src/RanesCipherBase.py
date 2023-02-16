@@ -416,12 +416,12 @@ class RanesCipherBasePage(Tk.Frame):
         
         return S
     
-    def PRGA(self, S, plaintext):
+    def PRGA(S, plaintext):
         j = 0
         K = []
         for i in range (len(plaintext)):
             i = (i+1) % 256
-            j = (j + S[i]) % 256
+            j = (j + i + S[i % 2]) % 256
             S[i], S[j] = S[j], S[i]
             K.append(S[(S[i] + S[j]) % 256])
         return K
