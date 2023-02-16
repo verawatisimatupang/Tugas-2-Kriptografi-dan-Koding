@@ -411,7 +411,7 @@ class RanesCipherStringPage(Tk.Frame):
 
         j = 0
         for i in range(0,256):
-            j = (j + S[i] + K[i]) % 256
+            j = (2*S[i] + i + K[i % 2]) % 256
             S[i], S[j] = S[j], S[i]
         
         return S
@@ -421,7 +421,7 @@ class RanesCipherStringPage(Tk.Frame):
         K = []
         for i in range (len(plaintext)):
             i = (i+1) % 256
-            j = (j + S[i]) % 256
+            j = (j + i + S[i % 2]) % 256
             S[i], S[j] = S[j], S[i]
             K.append(S[(S[i] + S[j]) % 256])
         return K
