@@ -452,7 +452,7 @@ class RanesCipherStringPage(Tk.Frame):
             self.cipher_string.set(result_string)
             self.cipher_base.set(result_base64)
     
-    # Decrypt (Masih salah)
+    # Decyrpt
     def decrypt(self):
         plaintext = self.plain.get()
         key = self.key.get()
@@ -461,7 +461,7 @@ class RanesCipherStringPage(Tk.Frame):
             messagebox.showerror("Error", "Please input plaintext / file")
         elif len(key) == 0:
             messagebox.showerror("Error", "Please input key / file")
-        else :  
+        else :   
             ksa_key = self.KSA(key)
             prga_ksakey_plaintext = self.PRGA(ksa_key, plaintext)
             xor_plaintext_prgaksakey = self.XOR(plaintext, prga_ksakey_plaintext)
