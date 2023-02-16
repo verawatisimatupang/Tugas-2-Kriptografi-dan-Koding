@@ -433,7 +433,7 @@ class RanesCipherBasePage(Tk.Frame):
             ciphertext.append(formula)
         return ciphertext
     
-    # Encrypt (Masih salah)
+    # Encrypt
     def encrypt(self):
         plaintext = self.plain.get()
         key = self.key.get()
