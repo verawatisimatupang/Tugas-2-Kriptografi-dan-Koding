@@ -204,7 +204,7 @@ class RanesCipherStringPage(Tk.Frame):
             image=self.button_image_6,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: self.downloadfilebiner_biner(),
+            command=lambda: self.downloadfilebiner_base(),
             relief="flat"
         )
         self.downloadbiner_with_space_button.place(
@@ -300,7 +300,7 @@ class RanesCipherStringPage(Tk.Frame):
             image=self.button_image_12,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: self.downloadfiletxt_biner(),
+            command=lambda: self.downloadfiletxt_base(),
             relief="flat"
         )
         self.downloadtxt_with_space_button.place(
@@ -561,7 +561,7 @@ class RanesCipherStringPage(Tk.Frame):
     
     
     # download file txt of cipher base
-    def downloadfiletxt_biner(self):
+    def downloadfiletxt_base(self):
         if len(self.plain.get()) == 0:
             messagebox.showerror("Error", "Please input plaintext / file")
         else :
@@ -585,7 +585,7 @@ class RanesCipherStringPage(Tk.Frame):
                 file.close()
     
     # download file biner of cipher base
-    def downloadfilebiner_biner(self):
+    def downloadfilebiner_base(self):
         if len(self.plain.get()) == 0:
             messagebox.showerror("Error", "Please input plaintext / file")
         else :
