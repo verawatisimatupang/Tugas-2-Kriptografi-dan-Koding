@@ -188,7 +188,7 @@ class RanesCipherBasePage(Tk.Frame):
             image=self.button_image_5,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: self.downloadfilebiner_base(),
+            command=lambda: self.downloadfiletxt_base(),
             relief="flat"
         )
         self.downloadbiner_no_space_button.place(
@@ -204,7 +204,7 @@ class RanesCipherBasePage(Tk.Frame):
             image=self.button_image_6,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: self.downloadfilebiner_base(),
+            command=lambda: self.downloadfiletxt_base(),
             relief="flat"
         )
         self.downloadbiner_with_space_button.place(
@@ -220,7 +220,7 @@ class RanesCipherBasePage(Tk.Frame):
             image=self.button_image_7,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: self.uploadfilebiner_plaintext(),
+            command=lambda: self.uploadfiletxt_plaintext(),
             relief="flat"
         )
         self.uploadbiner_plaintext_button.place(
@@ -236,7 +236,7 @@ class RanesCipherBasePage(Tk.Frame):
             image=self.button_image_8,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: self.uploadfilebiner_key(),
+            command=lambda: self.uploadfiletxt_key(),
             relief="flat"
         )
         self.uploadbiner_key_button.place(
@@ -355,7 +355,7 @@ class RanesCipherBasePage(Tk.Frame):
             font=("Inter Bold", 64 * -1)
         )
     
-    # start
+    # start page
     def startPage(self):
         self.mainloop()
     
@@ -535,22 +535,6 @@ class RanesCipherBasePage(Tk.Frame):
             text = read_filetxt.decode("latin-1")
             self.key.set(text)
 
-    # upload file biner of plaintext
-    def uploadfilebiner_plaintext(self):
-        file = filedialog.askopenfile(mode='rb', filetypes =[('All Files', '*')])
-        if file != None:
-            read_filebiner = bytearray(file.read())
-            text = read_filebiner.decode("latin-1")
-            self.plain.set(text)
-    
-    # upload file biner of key
-    def uploadfilebiner_key(self):
-        file = filedialog.askopenfile(mode='rb', filetypes =[('All Files', '*')])
-        if file != None:
-            read_filebiner = bytearray(file.read())
-            text = read_filebiner.decode("latin-1")
-            self.key.set(text)
-    
     # download file txt of cipher string
     def downloadfiletxt_string(self):
         if len(self.plain.get()) == 0:
@@ -563,7 +547,6 @@ class RanesCipherBasePage(Tk.Frame):
                 file.write(write_filetxt)
                 file.close()
     
-    
     # download file txt of cipher base
     def downloadfiletxt_base(self):
         if len(self.plain.get()) == 0:
@@ -574,28 +557,4 @@ class RanesCipherBasePage(Tk.Frame):
                 get_filetxt = self.cipher_base.get()
                 write_txt = get_filetxt.encode("latin-1")
                 file.write(write_txt)
-                file.close()
-    
-    # download file biner of cipher string
-    def downloadfilebiner_string(self):
-        if len(self.plain.get()) == 0:
-            messagebox.showerror("Error", "Please input plaintext / file")
-        else :
-            file = filedialog.asksaveasfile(mode='wb', filetypes =[('All Files', '*')])
-            if file != None:
-                get_filebiner = self.cipher_string.get()
-                write_filebiner = get_filebiner.encode("latin-1")
-                file.write(write_filebiner)
-                file.close()
-    
-    # download file biner of cipher base
-    def downloadfilebiner_base(self):
-        if len(self.plain.get()) == 0:
-            messagebox.showerror("Error", "Please input plaintext / file")
-        else :
-            file = filedialog.asksaveasfile(mode='wb', filetypes =[('All Files', '*')])
-            if file != None:
-                get_filebiner = self.cipher_base.get()
-                write_filebiner = get_filebiner.encode("latin-1")
-                file.write(write_filebiner)
                 file.close()
