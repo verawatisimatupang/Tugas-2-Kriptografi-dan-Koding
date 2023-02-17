@@ -519,19 +519,21 @@ class RanesCipherBasePage(Tk.Frame):
             self.cipher_string.set(result_string)
             self.cipher_base.set(result_base64)
     
-     # upload file txt of plaintext
+    # upload file txt of plaintext
     def uploadfiletxt_plaintext(self):
-        file = filedialog.askopenfile(mode='r', filetypes =[('Text files', 'txt')])
+        file = filedialog.askopenfile(mode='rb', filetypes =[('Text files', 'txt')])
         if file != None:
-            read_filetxt = file.read()
-            self.plain.set(read_filetxt)
-    
+            read_filetxt = bytearray(file.read())
+            text = read_filetxt.decode("latin-1")
+            self.plain.set(text)
+
     # upload file txt of key
     def uploadfiletxt_key(self):
-        file = filedialog.askopenfile(mode='r', filetypes =[('Text files', 'txt')])
+        file = filedialog.askopenfile(mode='rb', filetypes =[('Text files', 'txt')])
         if file != None:
-            read_filetxt = file.read()
-            self.key.set(read_filetxt)
+            read_filetxt = bytearray(file.read())
+            text = read_filetxt.decode("latin-1")
+            self.key.set(text)
 
     # upload file biner of plaintext
     def uploadfilebiner_plaintext(self):
@@ -557,8 +559,8 @@ class RanesCipherBasePage(Tk.Frame):
             file = filedialog.asksaveasfile(mode='wb', defaultextension=".txt")
             if file != None:
                 get_filetxt = self.cipher_string.get()
-                write_filebiner = get_filetxt.encode("utf-8")
-                file.write(write_filebiner)
+                write_filetxt = get_filetxt.encode("latin-1")
+                file.write(write_filetxt)
                 file.close()
     
     
@@ -570,7 +572,7 @@ class RanesCipherBasePage(Tk.Frame):
             file = filedialog.asksaveasfile(mode='wb', defaultextension=".txt")
             if file != None:
                 get_filetxt = self.cipher_base.get()
-                write_txt = get_filetxt.encode("utf-8")
+                write_txt = get_filetxt.encode("latin-1")
                 file.write(write_txt)
                 file.close()
     
