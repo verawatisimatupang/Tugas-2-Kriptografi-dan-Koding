@@ -188,7 +188,7 @@ class RanesCipherStringPage(Tk.Frame):
             image=self.button_image_5,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: self.downloadfilebiner_nospace(),
+            command=lambda: self.downloadfilebiner_string(),
             relief="flat"
         )
         self.downloadbiner_no_space_button.place(
@@ -204,7 +204,7 @@ class RanesCipherStringPage(Tk.Frame):
             image=self.button_image_6,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: self.downloadfilebiner_withspace(),
+            command=lambda: self.downloadfilebiner_biner(),
             relief="flat"
         )
         self.downloadbiner_with_space_button.place(
@@ -284,7 +284,7 @@ class RanesCipherStringPage(Tk.Frame):
             image=self.button_image_11,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: self.downloadfiletxt_nospace(),
+            command=lambda: self.downloadfiletxt_string(),
             relief="flat"
         )
         self.downloadtxt_no_space_button.place(
@@ -300,7 +300,7 @@ class RanesCipherStringPage(Tk.Frame):
             image=self.button_image_12,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: self.downloadfiletxt_withspace(),
+            command=lambda: self.downloadfiletxt_biner(),
             relief="flat"
         )
         self.downloadtxt_with_space_button.place(
@@ -355,23 +355,27 @@ class RanesCipherStringPage(Tk.Frame):
             font=("Inter Bold", 64 * -1)
         )
     
+    # start
     def startPage(self):
         self.mainloop()
     
+    # back home
     def click_backHome(self):
         self.origin.Home()
     
-    # Reset
+    # reset
     def reset(self):
         self.plain.set("")
         self.key.set("")
         self.cipher_string.set("")
         self.cipher_base.set("")
     
+    # text to ascii
     def text_to_ascii(self, text):
         ascii_list = [ord(char) for char in text]
         return ascii_list
     
+    # ascii to text
     def ascii_to_text(self, number):
         text = []
         for i in range (len(number)):
@@ -379,28 +383,33 @@ class RanesCipherStringPage(Tk.Frame):
             result  = "".join(text)
         return result
 
+    # text to base64
     def text_to_base64(self, text):
         text_bytes = text.encode("utf-8")
         base64_bytes = base64.b64encode(text_bytes)
         base64_str = base64_bytes.decode("ascii")
         return base64_str
-
+    
+    # base64 to text
     def base64_to_text(self, base64_str):
         base64_bytes = base64_str.encode("ascii")
         text_bytes = base64.b64decode(base64_bytes)
         text_str = text_bytes.decode("utf-8")
         return text_str
     
+    # ascii to base64
     def ascii_to_base64(self, number):
         convert_to_string = self.ascii_to_text(number)
         convert_to_base64 = self.text_to_base64(convert_to_string)
         return convert_to_base64
 
+    # base64 to ascii
     def base64_to_ascii(self, base64_str):
         convert_to_string = self.base64_to_text(base64_str)
         convert_to_ascii = self.text_to_ascii(convert_to_string)
         return convert_to_ascii
 
+    # ksa modifikasi
     def KSA(self, key):
         S = []
         K = []
@@ -416,6 +425,7 @@ class RanesCipherStringPage(Tk.Frame):
         
         return S
     
+    # prga modifikasi
     def PRGA(self, S, plaintext):
         j = 0
         K = []
@@ -426,14 +436,15 @@ class RanesCipherStringPage(Tk.Frame):
             K.append(S[(S[i] + S[j]) % 256])
         return K
     
+    # xor
     def XOR(self, plaintext, key):
         ciphertext = []
         for i in range(len(plaintext)):
             formula = ord(plaintext[i]) ^ key[i]
             ciphertext.append(formula)
         return ciphertext
-    
-    # Check length key
+
+    # check length key
     def checklength_key(self,plaintext, key):
         while len(key) < len(plaintext):
             key += key
@@ -445,6 +456,7 @@ class RanesCipherStringPage(Tk.Frame):
             result = "".join(finalkey) 
         return result 
 
+    # encrypt extended vigenere
     def encrypt_extended_vigenere(self, plaintext, key):
         check_length_key = self.checklength_key(plaintext,key)
         ciphertext = []
@@ -453,8 +465,10 @@ class RanesCipherStringPage(Tk.Frame):
             key_to_int = ord(check_length_key[i])
             encrypt_formula = (plaintext_to_int + key_to_int) % 256
             ciphertext.append(chr(encrypt_formula))
-        return ciphertext
+            result = "".join(ciphertext)
+        return result
     
+    # decrypt extended vigenere
     def decrypt_extended_vigenere(self, plaintext, key):
         check_length_key = self.checklength_key(plaintext,key)
         ciphertext = []
@@ -464,8 +478,8 @@ class RanesCipherStringPage(Tk.Frame):
             encrypt_formula = (plaintext_to_int - key_to_int) % 256
             ciphertext.append(chr(encrypt_formula))
         return ciphertext
-    
-    # Encrypt
+        
+    # encrypt
     def encrypt(self):
         plaintext = self.plain.get()
         key = self.key.get()
@@ -478,12 +492,13 @@ class RanesCipherStringPage(Tk.Frame):
             ksa_key = self.KSA(key)
             prga_ksakey_plaintext = self.PRGA(ksa_key, plaintext)
             xor_plaintext_prgaksakey = self.XOR(plaintext, prga_ksakey_plaintext)
-            result_string = self.ascii_to_text(xor_plaintext_prgaksakey)
-            result_base64 = self.text_to_base64(result_string)
-            self.cipher_string.set(result_string)
+            xor_plaintext_prgaksakey_string = self.ascii_to_text(xor_plaintext_prgaksakey)
+            encrypt_extvigenere = self.encrypt_extended_vigenere(xor_plaintext_prgaksakey_string, key)
+            result_base64 = self.text_to_base64(encrypt_extvigenere)
+            self.cipher_string.set(encrypt_extvigenere)
             self.cipher_base.set(result_base64)
-    
-    # Decyrpt
+
+    # decyrpt
     def decrypt(self):
         plaintext = self.plain.get()
         key = self.key.get()
@@ -493,10 +508,90 @@ class RanesCipherStringPage(Tk.Frame):
         elif len(key) == 0:
             messagebox.showerror("Error", "Please input key / file")
         else :   
+            decrypt_extvigenere = self.decrypt_extended_vigenere(plaintext, key)
             ksa_key = self.KSA(key)
-            prga_ksakey_plaintext = self.PRGA(ksa_key, plaintext)
-            xor_plaintext_prgaksakey = self.XOR(plaintext, prga_ksakey_plaintext)
+            prga_ksakey_plaintext = self.PRGA(ksa_key, decrypt_extvigenere)
+            xor_plaintext_prgaksakey = self.XOR(decrypt_extvigenere, prga_ksakey_plaintext)
             result_string = self.ascii_to_text(xor_plaintext_prgaksakey)
             result_base64 = self.text_to_base64(result_string)
             self.cipher_string.set(result_string)
             self.cipher_base.set(result_base64)
+    
+    # upload file txt of plaintext
+    def uploadfiletxt_plaintext(self):
+        file = filedialog.askopenfile(mode='r', filetypes =[('Text files', 'txt')])
+        if file != None:
+            read_filetxt = file.read()
+            self.plain.set(read_filetxt)
+    
+    # upload file txt of key
+    def uploadfiletxt_key(self):
+        file = filedialog.askopenfile(mode='r', filetypes =[('Text files', 'txt')])
+        if file != None:
+            read_filetxt = file.read()
+            self.key.set(read_filetxt)
+
+    # upload file biner of plaintext
+    def uploadfilebiner_plaintext(self):
+        file = filedialog.askopenfile(mode='rb', filetypes =[('All Files', '*')])
+        if file != None:
+            read_filebiner = bytearray(file.read())
+            text = read_filebiner.decode("latin-1")
+            self.plain.set(text)
+    
+    # upload file biner of key
+    def uploadfilebiner_key(self):
+        file = filedialog.askopenfile(mode='rb', filetypes =[('All Files', '*')])
+        if file != None:
+            read_filebiner = bytearray(file.read())
+            text = read_filebiner.decode("latin-1")
+            self.key.set(text)
+    
+    # download file txt of cipher string
+    def downloadfiletxt_string(self):
+        if len(self.plain.get()) == 0:
+            messagebox.showerror("Error", "Please input plaintext / file")
+        else :
+            file = filedialog.asksaveasfile(mode='wb', defaultextension=".txt")
+            if file != None:
+                get_filetxt = self.cipher_string.get()
+                write_filebiner = get_filetxt.encode("utf-8")
+                file.write(write_filebiner)
+                file.close()
+    
+    
+    # download file txt of cipher base
+    def downloadfiletxt_biner(self):
+        if len(self.plain.get()) == 0:
+            messagebox.showerror("Error", "Please input plaintext / file")
+        else :
+            file = filedialog.asksaveasfile(mode='wb', defaultextension=".txt")
+            if file != None:
+                get_filetxt = self.cipher_base.get()
+                write_txt = get_filetxt.encode("utf-8")
+                file.write(write_txt)
+                file.close()
+    
+    # download file biner of cipher string
+    def downloadfilebiner_string(self):
+        if len(self.plain.get()) == 0:
+            messagebox.showerror("Error", "Please input plaintext / file")
+        else :
+            file = filedialog.asksaveasfile(mode='wb', filetypes =[('All Files', '*')])
+            if file != None:
+                get_filebiner = self.cipher_string.get()
+                write_filebiner = get_filebiner.encode("latin-1")
+                file.write(write_filebiner)
+                file.close()
+    
+    # download file biner of cipher base
+    def downloadfilebiner_biner(self):
+        if len(self.plain.get()) == 0:
+            messagebox.showerror("Error", "Please input plaintext / file")
+        else :
+            file = filedialog.asksaveasfile(mode='wb', filetypes =[('All Files', '*')])
+            if file != None:
+                get_filebiner = self.cipher_base.get()
+                write_filebiner = get_filebiner.encode("latin-1")
+                file.write(write_filebiner)
+                file.close()
